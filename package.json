@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "Desafio realizado para vaga na Global Tecnologia.",
   "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
   "author": "Leonardo Lima",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.0"
+  }
 }
