@@ -1,10 +1,9 @@
 const express = require("express");
+const routes = require("./routes");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.end("Hello Global Tecnologias!");
-});
+app.use(routes);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Running in ${PORT}`));
+app.listen(PORT, () => console.log(`Running in port ${PORT}`));
