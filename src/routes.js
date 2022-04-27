@@ -1,21 +1,16 @@
 const express = require("express");
 const routes = express.Router();
 
+const userController = require("./controllers/userController");
+
 routes
   .get("/", (req, res) => {
-    res.end("Hello Global Tecnologias!");
+    res.end("Desafio Global Tecnologia.");
   })
-  .get("/users", (req, res) => {
-    res.end("Rota para listar os usuários.");
-  })
-  .post("/users", (req, res) => {
-    res.end("Rota para criar um usuário.");
-  })
-  .put("/users/:id", (req, res) => {
-    res.end("Rota para atualizar um usuário.");
-  })
-  .delete("/users/:id", (req, res) => {
-    res.end("Rota para deletar um usuário.");
-  });
+
+  .get("/users", userController.index)
+  .post("/users", userController.create)
+  .put("/users/:id", userController.update)
+  .delete("/users/:id", userController.delete);
 
 module.exports = routes;
