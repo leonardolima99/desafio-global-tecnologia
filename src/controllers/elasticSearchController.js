@@ -18,7 +18,8 @@ exports.index = async function (req, res) {
 
       allData.push(data);
     }
-    console.log(allData);
+
+    res.json(allData);
   } catch (err) {
     console.log(err.status, err.message);
   }
