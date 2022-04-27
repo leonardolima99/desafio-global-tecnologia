@@ -1,5 +1,13 @@
-exports.index = function (req, res) {
-  res.end("Rota para listar os usuários.");
+const knex = require("../database/connection");
+
+exports.index = async function (req, res) {
+  try {
+    const users = await knex("users");
+
+    res.json(users);
+  } catch (err) {
+    console.log(err.status, err.message);
+  }
 };
 
 exports.create = function (req, res) {
