@@ -1,0 +1,8 @@
+{
+  "name": "desafio-global",
+  "version": "1.0.0",
+  "description": "Desafio realizado para vaga na Global Tecnologia.",
+  "main": "src/server.js",
+  "author": "Leonardo Lima",
+  "license": "MIT"
+}
