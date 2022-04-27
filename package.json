@@ -4,7 +4,8 @@
   "description": "Desafio realizado para vaga na Global Tecnologia.",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "Leonardo Lima",
   "license": "MIT",
