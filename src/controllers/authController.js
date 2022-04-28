@@ -1,15 +1,21 @@
 const jwt = require("../config/jwt");
 
-const knex = require("knex");
+const knex = require("../database/connection");
 
 exports.signin = async function (req, res) {
   try {
     const { email, senha } = req.body;
 
-    const user = await knex("users").where({ email, senha });
-    console.log(user);
+    const user = await knex("users").where({
+      email,
+      senha,
+    });
+    console.log(!user.length);
+    if (!user.length) {
+      return res.json({ message: "Email ou senha incorretos.", status: 401 });
+    }
 
-    res.end();
+    res.json(user);
   } catch (err) {
     console.log(err.status, err.message);
   }
