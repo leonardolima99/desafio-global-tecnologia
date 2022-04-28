@@ -25,7 +25,7 @@ exports.authWorker = async function (req, res, next) {
 
     next();
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`authWorker error: ${err.status} -> ${err.message}`);
   }
 };
 
@@ -45,6 +45,6 @@ exports.authAdmin = async function (req, res, next) {
 
     next();
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`authAdmin error: ${err.status} -> ${err.message}`);
   }
 };

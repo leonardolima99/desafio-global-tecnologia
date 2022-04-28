@@ -2,11 +2,17 @@ const knex = require("../database/connection");
 
 exports.index = async function (req, res) {
   try {
-    const users = await knex("users");
+    const users = await knex("users").select(
+      "id",
+      "email",
+      "nivel_acesso",
+      "created_at",
+      "updated_at"
+    );
 
     res.json(users);
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`User index error: ${err.status} -> ${err.message}`);
   }
 };
 
@@ -18,7 +24,7 @@ exports.create = async function (req, res) {
 
     res.json(users);
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`User create error: ${err.status} -> ${err.message}`);
   }
 };
 
@@ -35,7 +41,7 @@ exports.update = async function (req, res) {
 
     res.json(user);
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`User update error: ${err.status} -> ${err.message}`);
   }
 };
 
@@ -49,6 +55,6 @@ exports.delete = async function (req, res) {
 
     res.json({ message: "Linha que deleta comentada.", status: 200 });
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`User delete error: ${err.status} -> ${err.message}`);
   }
 };

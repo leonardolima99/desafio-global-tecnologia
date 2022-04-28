@@ -23,6 +23,6 @@ exports.signin = async function (req, res) {
     });
     res.json({ auth: true, token });
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`Sign in Error: ${err.status} -> ${err.message}`);
   }
 };

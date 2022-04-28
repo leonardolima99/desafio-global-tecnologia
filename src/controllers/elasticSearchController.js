@@ -21,6 +21,6 @@ exports.index = async function (req, res) {
 
     res.json(allData);
   } catch (err) {
-    console.log(err.status, err.message);
+    console.log(`Hearth Check Error: ${err.status} -> ${err.message}`);
   }
 };
