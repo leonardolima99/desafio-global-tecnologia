@@ -1,5 +1,7 @@
 const knex = require("../database/connection");
 
+const bcryptjs = require("bcryptjs");
+
 exports.index = async function (req, res) {
   try {
     const users = await knex("users").select(
@@ -20,7 +22,13 @@ exports.create = async function (req, res) {
   try {
     const { email, nivel_acesso, senha } = req.body;
 
-    const users = await knex("users").insert({ email, nivel_acesso, senha });
+    const hash_senha = bcryptjs.hashSync(senha, 10);
+
+    const users = await knex("users").insert({
+      email,
+      nivel_acesso,
+      senha: hash_senha,
+    });
 
     res.json(users);
   } catch (err) {
