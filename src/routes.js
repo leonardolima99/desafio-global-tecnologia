@@ -3,11 +3,14 @@ const routes = express.Router();
 
 const userController = require("./controllers/userController");
 const elasticSearchController = require("./controllers/elasticSearchController");
+const authController = require("./controllers/authController");
 
 routes
   .get("/", (req, res) => {
     res.end("Desafio Global Tecnologia.");
   })
+
+  .post("/login", authController.signin)
 
   .get("/helth-check", elasticSearchController.index)
 
