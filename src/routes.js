@@ -5,6 +5,8 @@ const userController = require("./controllers/userController");
 const elasticSearchController = require("./controllers/elasticSearchController");
 const authController = require("./controllers/authController");
 
+const { authWorker, authAdmin } = require("./middlewares/authMiddleware");
+
 routes
   .get("/", (req, res) => {
     res.end("Desafio Global Tecnologia.");
@@ -12,11 +14,14 @@ routes
 
   .post("/login", authController.signin)
 
-  .get("/helth-check", elasticSearchController.index)
+  .get("/helth-check", authWorker, elasticSearchController.index)
 
-  .get("/users", userController.index)
-  .post("/users", userController.create)
-  .put("/users/:id", userController.update)
-  .delete("/users/:id", userController.delete);
+  .get("/users", authAdmin, userController.index)
+  .post("/users", authAdmin, userController.create)
+  .put("/users/:id", authAdmin, userController.update)
+  .delete("/users/:id", authAdmin, userController.delete)
+
+  .get("/auth", authWorker, userController.index)
+  .get("/admin", authAdmin, userController.index);
 
 module.exports = routes;
