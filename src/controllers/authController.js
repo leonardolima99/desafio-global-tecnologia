@@ -6,16 +6,22 @@ exports.signin = async function (req, res) {
   try {
     const { email, senha } = req.body;
 
-    const user = await knex("users").where({
-      email,
-      senha,
-    });
-    console.log(!user.length);
-    if (!user.length) {
+    const user = await knex("users")
+      .where({
+        email,
+        senha,
+      })
+      .first();
+
+    if (!user) {
       return res.json({ message: "Email ou senha incorretos.", status: 401 });
     }
 
-    res.json(user);
+    const token = await jwt.sign({
+      email: user.email,
+      nivel_acesso: user.nivel_acesso,
+    });
+    res.json({ auth: true, token });
   } catch (err) {
     console.log(err.status, err.message);
   }
