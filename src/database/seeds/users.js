@@ -6,13 +6,13 @@ exports.seed = async function (knex) {
       id: 1,
       email: "usuariocomum@teste.com.br",
       nivel_acesso: "funcionario",
-      senha: "123456",
+      senha: "$2a$10$/7pYkC9sYPosHV.D9PLHAu9foHQBN46k18LekZvLDbuViBA3NgAXG",
     },
     {
       id: 2,
-      email: "usarioadm@teste.com.br",
+      email: "usuarioadm@teste.com.br",
       nivel_acesso: "administrador",
-      senha: "123456",
+      senha: "$2a$10$/7pYkC9sYPosHV.D9PLHAu9foHQBN46k18LekZvLDbuViBA3NgAXG",
     },
   ]);
 };
