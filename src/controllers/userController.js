@@ -12,7 +12,7 @@ exports.index = async function (req, res) {
       "updated_at"
     );
 
-    res.json(users);
+    res.status(200).json(users);
   } catch (err) {
     console.log(`User index error: ${err.status} -> ${err.message}`);
   }
@@ -30,7 +30,7 @@ exports.create = async function (req, res) {
       senha: hash_senha,
     });
 
-    res.json(users);
+    res.status(200).json(users);
   } catch (err) {
     console.log(`User create error: ${err.status} -> ${err.message}`);
   }
@@ -47,7 +47,7 @@ exports.update = async function (req, res) {
       senha,
     });
 
-    res.json(user);
+    res.status(200).json(user);
   } catch (err) {
     console.log(`User update error: ${err.status} -> ${err.message}`);
   }
@@ -58,10 +58,10 @@ exports.delete = async function (req, res) {
     const { id } = req.params;
 
     /* const users = await knex("users").where({ id }).del(); */
-    /* res.json({ message: "Usuário deletado.", status: 200 }); */
+    /* res.status(200).json({ message: "Usuário deletado."}); */
     const users = await knex("users").where({ id });
 
-    res.json({ message: "Linha que deleta comentada.", status: 200 });
+    res.status(200).json({ message: "Linha que deleta comentada." });
   } catch (err) {
     console.log(`User delete error: ${err.status} -> ${err.message}`);
   }

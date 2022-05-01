@@ -14,13 +14,12 @@ exports.authWorker = async function (req, res, next) {
 
     if (!result) return res.status(401).json({ error: "Usuário não existe." });
 
-    const forbidden = !(
+    const authorized =
       result.nivel_acesso === "funcionario" ||
-      result.nivel_acesso === "administrador"
-    );
+      result.nivel_acesso === "administrador";
 
-    if (forbidden) {
-      return res.status(401).json({ error: "Usuário não autorizado" });
+    if (!authorized) {
+      return res.json({ error: "Usuário não autorizado" }).status(401);
     }
 
     next();

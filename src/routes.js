@@ -19,9 +19,6 @@ routes
   .get("/users", authAdmin, userController.index)
   .post("/users", authAdmin, userController.create)
   .put("/users/:id", authAdmin, userController.update)
-  .delete("/users/:id", authAdmin, userController.delete)
-
-  .get("/auth", authWorker, userController.index)
-  .get("/admin", authAdmin, userController.index);
+  .delete("/users/:id", authAdmin, userController.delete);
 
 module.exports = routes;

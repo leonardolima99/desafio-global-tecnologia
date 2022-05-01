@@ -18,8 +18,8 @@ exports.index = async function (req, res) {
 
       allData.push(data);
     }
-
-    res.json(allData);
+    console.log(allData);
+    res.status(200).json(allData);
   } catch (err) {
     console.log(`Hearth Check Error: ${err.status} -> ${err.message}`);
   }
