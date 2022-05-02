@@ -80,10 +80,10 @@ exports.delete = async function (req, res) {
 
     if (!user) res.status(403).json({ error: "Este usuário não existe." });
 
-    if (user.email == req.email)
+    /* if (user.email == req.email)
       return res
         .status(403)
-        .json({ message: "Você não pode apagar seu proŕio usuário." });
+        .json({ message: "Você não pode apagar seu proŕio usuário." }); */
 
     await knex("users").where({ id }) /* .del() */;
     res.status(200).json({ message: "Usuário deletado." });
