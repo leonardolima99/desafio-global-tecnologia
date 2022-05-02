@@ -29,7 +29,7 @@ exports.create = async function (req, res) {
       return res.status(403).json({ error: "Nível de acesso inválido." });
     }
 
-    const userExists = await knex("users").where({ email });
+    const userExists = await knex("users").where({ email }).first();
 
     if (userExists)
       return res.status(403).json({ error: "Este usuário já existe." });
