@@ -2,6 +2,8 @@
 
 API desenvolvida para o desafio proposto pela **Global Tegnologia**. Uma aplicação com funcionalidade de _login_, _CRUD de usuários_, consumo de _api externa_, _nível de acesso_ e _rotas autenticadas_.
 
+### Testado no **Node.js 14.16.0**
+
 ## 🚶‍♂️ Passos para executar
 
 Faça um clone do projeto.
