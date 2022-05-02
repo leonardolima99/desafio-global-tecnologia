@@ -41,7 +41,7 @@ exports.authAdmin = async function (req, res, next) {
       .first();
 
     if (!result) return res.status(401).json({ error: "Não autorizado." });
-
+    req.email = email;
     next();
   } catch (err) {
     console.log(`authAdmin error: ${err.status} -> ${err.message}`);

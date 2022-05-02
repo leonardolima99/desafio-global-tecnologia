@@ -29,7 +29,7 @@ exports.create = async function (req, res) {
       nivel_acesso,
       senha: hash_senha,
     });
-
+    console.log(users);
     res.status(200).json(users);
   } catch (err) {
     console.log(`User create error: ${err.status} -> ${err.message}`);
@@ -57,11 +57,17 @@ exports.delete = async function (req, res) {
   try {
     const { id } = req.params;
 
-    /* const users = await knex("users").where({ id }).del(); */
-    /* res.status(200).json({ message: "Usuário deletado."}); */
-    const users = await knex("users").where({ id });
+    const user = await knex("users").where({ id }).first();
+    if (user.email == req.email)
+      return res
+        .status(403)
+        .json({ message: "Você não pode apagar seu proŕio usuário." });
 
-    res.status(200).json({ message: "Linha que deleta comentada." });
+    await knex("users").where({ id }).del();
+    res.status(200).json({ message: "Usuário deletado." });
+    /* const users = await knex("users").where({ id });
+
+    res.status(200).json({ message: "Linha que deleta comentada." }); */
   } catch (err) {
     console.log(`User delete error: ${err.status} -> ${err.message}`);
   }

@@ -2,6 +2,8 @@ const path = require("path");
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
+require("dotenv").config({ path: ".env" });
+
 module.exports = {
   development: {
     client: "sqlite3",
@@ -17,35 +19,20 @@ module.exports = {
     useNullAsDefault: true,
   },
 
-  staging: {
-    client: "postgresql",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: "knex_migrations",
-    },
-  },
-
   production: {
-    client: "postgresql",
+    client: "pg",
     connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
-    },
-    pool: {
-      min: 2,
-      max: 10,
+      host: process.env.HOST_DB,
+      user: process.env.USER_DB,
+      password: process.env.PASSWORD_DB,
+      database: process.env.DATABASE,
     },
     migrations: {
-      tableName: "knex_migrations",
+      directory: path.resolve(__dirname, "src", "database", "migrations"),
     },
+    seeds: {
+      directory: path.resolve(__dirname, "src", "database", "seeds"),
+    },
+    useNullAsDefault: true,
   },
 };
