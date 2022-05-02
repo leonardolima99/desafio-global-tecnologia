@@ -60,10 +60,12 @@ exports.update = async function (req, res) {
       return res.status(403).json({ error: "Nível de acesso inválido." });
     }
 
+    const hash_senha = bcryptjs.hashSync(senha, 10);
+
     const user = await knex("users").where({ id }).update({
       email,
       nivel_acesso,
-      senha,
+      senha: hash_senha,
     });
 
     res.status(200).json(user);
