@@ -7,6 +7,9 @@ exports.signin = async function (req, res) {
   try {
     const { email, senha } = req.body;
 
+    if (!email || !senha)
+      return res.status(403).json({ error: "Email ou senha inválidos." });
+
     const user = await knex("users")
       .where({
         email,

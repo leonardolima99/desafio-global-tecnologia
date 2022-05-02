@@ -22,6 +22,18 @@ exports.create = async function (req, res) {
   try {
     const { email, nivel_acesso, senha } = req.body;
 
+    if (!email || !senha)
+      return res.status(403).json({ error: "Email ou senha inválidos." });
+
+    if (nivel_acesso !== "administrador" && nivel_acesso !== "funcionario") {
+      return res.status(403).json({ error: "Nível de acesso inválido." });
+    }
+
+    const userExists = await knex("users").where({ email });
+
+    if (userExists)
+      return res.status(403).json({ error: "Este usuário já existe." });
+
     const hash_senha = bcryptjs.hashSync(senha, 10);
 
     const users = await knex("users").insert({
@@ -41,6 +53,13 @@ exports.update = async function (req, res) {
     const { id } = req.params;
     const { email, nivel_acesso, senha } = req.body;
 
+    if (!email || !senha)
+      return res.status(403).json({ error: "Email ou senha inválidos." });
+
+    if (nivel_acesso !== "administrador" && nivel_acesso !== "funcionario") {
+      return res.status(403).json({ error: "Nível de acesso inválido." });
+    }
+
     const user = await knex("users").where({ id }).update({
       email,
       nivel_acesso,
@@ -58,12 +77,15 @@ exports.delete = async function (req, res) {
     const { id } = req.params;
 
     const user = await knex("users").where({ id }).first();
+
+    if (!user) res.status(403).json({ error: "Este usuário não existe." });
+
     if (user.email == req.email)
       return res
         .status(403)
         .json({ message: "Você não pode apagar seu proŕio usuário." });
 
-    await knex("users").where({ id }).del();
+    await knex("users").where({ id }) /* .del() */;
     res.status(200).json({ message: "Usuário deletado." });
     /* const users = await knex("users").where({ id });
 
