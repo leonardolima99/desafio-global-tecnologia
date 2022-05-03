@@ -34,7 +34,7 @@ routes
   .post(
     "/users",
     authAdmin,
-    body("email").isEmail().withMessage("O e-mail é obrigatório."),
+    body("email").isEmail().withMessage("O e-mail deve ser válido."),
     body("senha")
       .isLength({ min: 5 })
       .withMessage("A senha deve ter mais de 5 caracteres."),
@@ -50,7 +50,7 @@ routes
   .put(
     "/users/:id",
     authAdmin,
-    body("email").isEmail().withMessage("O e-mail é obrigatório."),
+    body("email").isEmail().withMessage("O e-mail deve ser válido."),
     body("senha")
       .isLength({ min: 5 })
       .withMessage("A senha deve ser maior que 5."),
