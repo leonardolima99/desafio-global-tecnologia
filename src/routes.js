@@ -16,8 +16,8 @@ routes
 
   .post(
     "/login",
-    body("email").isEmail(),
-    body("senha").isLength({ min: 5 }),
+    body("email"),
+    body("senha"),
     (req, res, next) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
