@@ -28,7 +28,7 @@ routes
     authController.signin
   )
 
-  .get("/helth-check", authWorker, elasticSearchController.index)
+  .get("/health-check", authWorker, elasticSearchController.index)
 
   .get("/users", authAdmin, userController.index)
   .post(

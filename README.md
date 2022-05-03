@@ -6,6 +6,8 @@ API desenvolvida para o desafio proposto pela **Global Tegnologia**. Uma aplica�
 
 ## 🚶‍♂️ Passos para executar
 
+Primeiro tenha certeza de ter o Node.js 14.16.0 em sua máquina, o projeto é configurado para funcionar especificamente com ele. Configure esta versão como padrão seguindo esse [tutorial](https://github.com/nvm-sh/nvm) do nvm.
+
 Faça um clone do projeto.
 
 ```
@@ -22,15 +24,10 @@ yarn install # caso use yarn
 npm install # caso use npm
 ```
 
-Agora você pode iniciar o servidor.
+Agora você precisa criar o arquivo `.env` seguindo o `.env.example`.
+Defina um PORT diferente de 3000 (eu uso 3001), e um SECRET que será usado para gerar e validar o token na autenticação.
 
-```
-yarn start # com yarn
-```
-
-```
-npm start # com npm
-```
+Em seguida você deve preencher o banco de dados com os usuários mocados.
 
 ## 🎲 Banco de dados
 
@@ -52,17 +49,27 @@ Agora com o banco de dados pronto, você pode usar a API.
 
 ## 🏃‍♂️ Endpoints
 
+Agora você pode iniciar o servidor.
+
+```
+yarn dev # com yarn
+```
+
+```
+npm run dev # com npm
+```
+
 Com exceção de `/login` todas os recursos são _restritos_ para usuários cadastrados.
 
 Os usuários cadastrados são:
 
 ```
 ▪︎ Funcionário
-  email: usuariocomum@mail.com
+  email: usuariocomum@teste.com.br
   senha: 123456
 
 ▪︎ Administrador
-  email: usuarioadministrador@mail.com
+  email: usuarioadm@teste.com.br
   senha: 123456
 ```
 
@@ -73,15 +80,15 @@ Os usuários cadastrados são:
 Form Encoded
 
 ```
-  email: usuarioadministrador@mail.com
+  email: usuarioadm@teste.com.br
   senha: 123456
 ```
 
-Esse recurso retorna um _token_, que você usará para se _autenticar_ nos outros recursos.
+Este recurso retorna um _token_, que você usará para se _autenticar_ nos outros recursos.
 
-Para se autenticar você adiciona um header na requisição chamado `Authentication` e com o valor `Bearer TOKEN-AQUI`. Faça isso nas próximas requisições.
+Para se autenticar você adiciona um header na requisição chamado `Authorization` e com o valor `Bearer TOKEN-AQUI`. Faça isso nas próximas requisições.
 
-**GET** `/hearth-check`
+**GET** `/health-check`
 
 > Os próximos recursos estão disponíveis apenas para administradores.
 
@@ -99,7 +106,7 @@ body json \*nivel_acesso pode ser **funcionario** ou **administrador**
 }
 ```
 
-**PUT** `/users/:id` \*substitua :id pelo id
+**PUT** `/users/:id` \*substitua :id pelo id do usuario pretendido
 
 body json \*com dados atualizados, mantenha a estrutura mesmo que não atualize algum dado.
 
@@ -111,4 +118,4 @@ body json \*com dados atualizados, mantenha a estrutura mesmo que não atualize 
 }
 ```
 
-**DELETE** `/users/:id` \*substitua :id pelo id
+**DELETE** `/users/:id` \*substitua :id pelo id do usuario pretendido
